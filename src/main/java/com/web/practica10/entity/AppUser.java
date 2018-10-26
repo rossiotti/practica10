@@ -1,41 +1,60 @@
 package com.web.practica10.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity
-@Table(name = "App_User", //
-        uniqueConstraints = { //
-                @UniqueConstraint(name = "APP_USER_UK", columnNames = "User_Name") })
-public class AppUser {
+public class AppUser implements Serializable {
 
     @Id
     @GeneratedValue
-    @Column(name = "User_Id", nullable = false)
-    private Long userId;
+    private int userId;
 
-    @Column(name = "User_Name", length = 36, nullable = false)
-    private String userName;
+    private String username;
 
-    @Column(name = "Password", length = 128, nullable = false)
-    private String Password;
+    private String password;
 
-    @Column(name = "Enabled", length = 1, nullable = false)
     private boolean enabled;
 
-    public Long getUserId() {
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<AppRole> rolSet;
+
+    public AppUser() {
+
+    }
+
+    public AppUser(String name, String password, boolean enabled, Set<AppRole> rolSet) {
+        super();
+    this.username = name;
+    this.password = password;
+    this.enabled = enabled;
+    this.rolSet = rolSet;
+    }
+
+
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public boolean isEnabled() {
@@ -46,11 +65,11 @@ public class AppUser {
         this.enabled = enabled;
     }
 
-    public void setPassword(String password) {
-        this.Password = password;
+    public Set<AppRole> getRolSet() {
+        return rolSet;
     }
 
-    public String getPassword() {
-        return Password;
+    public void setRolSet(Set<AppRole> rolSet) {
+        this.rolSet = rolSet;
     }
 }

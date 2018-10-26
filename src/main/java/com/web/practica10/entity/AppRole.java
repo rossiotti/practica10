@@ -1,26 +1,31 @@
 package com.web.practica10.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "App_Role", //
-        uniqueConstraints = { //
-                @UniqueConstraint(name = "APP_ROLE_UK", columnNames = "Role_Name") })
-public class AppRole {
+public class AppRole implements Serializable {
 
     @Id
     @GeneratedValue
-    @Column(name = "Role_Id", nullable = false)
-    private Long roleId;
+    private int roleId;
 
-    @Column(name = "Role_Name", length = 30, nullable = false)
     private String roleName;
 
-    public Long getRoleId() {
+    public AppRole() {
+
+    }
+
+    public AppRole(String rolename) {
+        super();
+        this.roleName = rolename;
+    }
+
+    public int getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
+    public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
 
