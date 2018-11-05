@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
+<head>
 
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-        <title>SB Admin - Blank Page</title>
+    <title>SB Admin - Blank Page</title>
 
-        <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
-        <link rel="stylesheet" type="text/css" th:href="@{css/all.min.css}"/>
-        <link rel="stylesheet" type="text/css" th:href="@{css/sb-admin.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{css/all.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{css/sb-admin.css}"/>
 
-        <!-- Page level plugin CSS-->
-        <link th:href="@{css/dataTables.bootstrap4.css}" rel="stylesheet">
+    <!-- Page level plugin CSS-->
+    <link th:href="@{css/dataTables.bootstrap4.css}" rel="stylesheet">
 
-    </head>
+</head>
 
 <body id="page-top">
 
@@ -110,9 +110,9 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/indexUser">
+            <a class="nav-link" href="">
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Clientes</span></a>
+                <span>Charts</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="">
@@ -130,13 +130,25 @@
                 <li class="breadcrumb-item">
                     <a href="">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active">Blank Page</li>
+                <li class="breadcrumb-item active">
+                    <a href="/indexUsuarios">Clientes</a>
+                </li>
             </ol>
 
-            <!-- Page Content -->
-            <h1>Pagina del Admin</h1>
-            <hr>
-            <p>This is a great starting point for new custom pages.</p>
+            <div class="btn">
+                <a class="btn btn-outline-primary" href="/crearUser">Crear Cliente</a>
+            </div>
+            <table>
+                <th:block th:each="client : ${clientes}">
+                    <tr>
+                        <td th:text="${client.ced}">...</td>
+                        <td th:text="${client.name}">...</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" th:text="${client.phone}">...</td>
+                    </tr>
+                </th:block>
+            </table>
 
         </div>
         <!-- /.container-fluid -->
