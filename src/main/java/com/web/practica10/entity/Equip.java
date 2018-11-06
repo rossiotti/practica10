@@ -24,18 +24,27 @@ public class Equip implements Serializable {
 
     private String photo;
 
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
     private int stock;
 
     public Equip() {
     }
 
-    public Equip(String name, int tariff, String family, String subFamily, Boolean enabled, String photo) {
+    public Equip(String name, int tariff, String family, String subFamily, Boolean enabled, String photo, int stock) {
         this.name = name;
         this.tariff = tariff;
         this.family = family;
         this.subFamily = subFamily;
         this.enabled = enabled;
         this.photo = photo;
+        this.stock = stock;
     }
 
     public int getId() {

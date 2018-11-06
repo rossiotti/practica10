@@ -110,6 +110,18 @@
             </div>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="/indexUser">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Clientes</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="upload.html">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Test Up</span></a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link" href="">
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Charts</span></a>
@@ -131,18 +143,40 @@
                     <a href="">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    <a href="/indexUsuarios">Clientes</a>
+                    <a href="/indexEquipos">Equipos</a>
                 </li>
             </ol>
 
-            <form action="#" th:action="@{/crearUser}" th:object="${cliente}" method="POST" enctype=multipart/form-data class="form-group">
-                <p>Cedula: <input type="text" class="form-control" pattern="[0-9]{3}-[0-9]{7}-[0-9]{1}" th:field="*{ced}" required/></p>
-                <p>Nombre: <input type="text" class="form-control" th:field="*{name}" required /></p>
-                <p>Telefono: <input type="tel" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required th:field="*{phone}" /></p>
-                <p>Email: <input type="email" class="form-control" th:field="*{email}" required/></p>
-                <p>Foto:<input type="file" name="file" class="form-control-file file-input" /></p>
-                <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-            </form>
+            <div class="btn">
+                <a class="btn btn-outline-primary" href="/crearEquipo">Crear Equipo</a>
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Foto</th>
+                    <th>Nombre</th>
+                    <th>Familia</th>
+                    <th>Sub-Familia</th>
+                    <th>Tarifa</th>
+                    <th>Stock</th>
+                    <th>Accion</th>
+                </tr>
+                <th:block th:each="equipo : ${equipos}">
+
+                    <tr>
+                        <td><img th:src="@{${equipo.photo}}" style="width:128px;height:128px;"></td>
+                        <td th:text="${equipo.name}">...</td>
+                        <td th:text="${equipo.family}">...</td>
+                        <td th:text="${equipo.subFamily}">...</td>
+                        <td th:text="${equipo.tariff}">...</td>
+                        <td th:text="${equipo.stock}">...</td>
+                        <td>
+                            <div class="btn">
+                                <a href="" class="btn btn-primary"><i class="fa fa-edit"></i></a> <a class="btn btn-danger" th:href="@{/borrarUser(id=${client.id})}"><i class="fa fa-eraser"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </th:block>
+            </table>
 
         </div>
         <!-- /.container-fluid -->
@@ -196,7 +230,7 @@
 
 <!-- Custom scripts for all pages-->
 <script th:src="@{js/sb-admin.min.js}"></script>
-<script th:src="@{js/main.js}"></script>
+
 </body>
 
 </html>
