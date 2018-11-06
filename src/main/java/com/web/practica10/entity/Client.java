@@ -20,7 +20,7 @@ public class Client implements Serializable {
     @NotEmpty
     private String ced;
 
-    private long phone;
+    private String phone;
 
     private String email;
 
@@ -34,7 +34,7 @@ public class Client implements Serializable {
     public Client() {
     }
 
-    public Client(String name, String ced, long phone, String email, String photo, Boolean enabled, Set<AppRole> rolSet) {
+    public Client(String name, String ced, String phone, String email, String photo, Boolean enabled, Set<AppRole> rolSet) {
         this.name = name;
         this.ced = ced;
         this.phone = phone;
@@ -68,11 +68,11 @@ public class Client implements Serializable {
         this.ced = ced;
     }
 
-    public long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

@@ -12,7 +12,7 @@
     <title>SB Admin - Blank Page</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{css/all.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{css/all.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{css/sb-admin.css}"/>
 
     <!-- Page level plugin CSS-->
@@ -135,9 +135,12 @@
                 </li>
             </ol>
 
-            <form action="#" th:action="@{/crearUser}" th:object="${cliente}" method="post">
-                <p>Cedula: <input type="text" th:field="*{ced}" /></p>
-                <p>Nombre: <input type="text" th:field="*{name}" /></p>
+            <form action="#" th:action="@{/crearUser}" th:object="${cliente}" method="POST" enctype=multipart/form-data>
+                <p>Cedula: <input type="text" pattern="[0-9]{3}-[0-9]{7}-[0-9]{1}" th:field="*{ced}" required/></p>
+                <p>Nombre: <input type="text" th:field="*{name}" required /></p>
+                <p>Telefono: <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required th:field="*{phone}" /></p>
+                <p>Email: <input type="email" th:field="*{email}" required/></p>
+                <p>Foto:<input type="file" name="file" class="file-input" /></p>
                 <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
             </form>
 
@@ -193,7 +196,7 @@
 
 <!-- Custom scripts for all pages-->
 <script th:src="@{js/sb-admin.min.js}"></script>
-
+<script th:src="@{js/main.js}"></script>
 </body>
 
 </html>
