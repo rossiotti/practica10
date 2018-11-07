@@ -135,12 +135,20 @@
                 </li>
             </ol>
 
-            <form action="#" th:action="@{/crearAlquiler}" th:object="${alquiler}" method="POST" enctype=multipart/form-data class="form-group">
+            <form action="#" th:action="@{/crearAlquiler}" th:object="${alquiler}"  method="POST" class="form-group">
                 <p>Fecha: <input type="text" class="form-control" th:field="*{date}" required/></p>
                 <p>Fecha de entrega: <input type="text" class="form-control" th:field="*{deliveryDate}" required /></p>
-                <p>Cliente: <input type="tel" class="form-control" required th:field="*{client}" /></p>
+                <select th:field="*{client}" class="form-control" name="selectClient">
+                <th:block th:each="client : ${clientes}">
+                        <option th:value="*{client}" th:text="${client.name}" th:id="${client.id}"  >...</option>
+                </th:block>
+                </select>
+                <select name="equipo" class="form-control">
+                    <th:block th:each="equipo : ${equipos}" th:multiple="#object">
+                        <option th:value="${equipo.name}" th:text="${equipo.name}"   >...</option>
+                    </th:block>
+                </select>
                 <p>Cantidad: <input type="number" class="form-control" th:field="*{equipStock}" required/></p>
-                <p>Costo: <input type="number" class="form-control" th:field="*{cost}" required/></p>
                 <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
             </form>
 

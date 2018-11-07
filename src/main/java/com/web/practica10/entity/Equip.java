@@ -24,6 +24,8 @@ public class Equip implements Serializable {
 
     private String photo;
 
+    private int stock;
+
     public int getStock() {
         return stock;
     }
@@ -32,7 +34,7 @@ public class Equip implements Serializable {
         this.stock = stock;
     }
 
-    private int stock;
+
 
     public Equip() {
     }

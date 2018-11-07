@@ -1,6 +1,7 @@
 package com.web.practica10.controllers;
 
 import com.web.practica10.entity.Rental;
+import com.web.practica10.service.ClientService;
 import com.web.practica10.service.EquipService;
 import com.web.practica10.service.FileStorageService;
 import com.web.practica10.service.RentService;
@@ -25,6 +26,9 @@ public class RentalController {
         private EquipService equipService;
 
         @Autowired
+        private ClientService cs;
+
+        @Autowired
         private FileStorageService fileStorageService;
 
         @RequestMapping(value = "/indexAlquiler", method = RequestMethod.GET)
@@ -38,22 +42,24 @@ public class RentalController {
 
         @RequestMapping(value = "/crearAlquiler", method = RequestMethod.GET)
         public ModelAndView showForm() {
-            return new ModelAndView("crearAlquiler", "alquiler", new Rental());
+            ModelAndView model = new ModelAndView();
+
+            model.addObject("alquiler",new Rental());
+            model.addObject("clientes",cs.listClients());
+            model.addObject("equipos",equipService.listEquip(true,1));
+            model.setViewName("crearAlquiler");
+            return model;
         }
 
-      /*  @RequestMapping(value = "/crearAlquiler", method = RequestMethod.POST)
-        public ModelAndView submit(@RequestParam("file") MultipartFile file, @ModelAttribute("alquiler")Rental rental) {
+       @RequestMapping(value = "/crearAlquiler", method = RequestMethod.POST)
+        public ModelAndView submit(@ModelAttribute("alquiler")Rental rental) {
 
-            if(file != null){
-                String fileName = fileStorageService.storeFile(file);
-                equip.setPhoto(fileName);
-            }
 
-            equipService.createEquip(equip);
+            rentService.createRent(rental);
 
 
             return indexEquipos();
         }
-    }*/
+    }
 
-}
+

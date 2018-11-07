@@ -18,16 +18,13 @@ public class EquipRental implements Serializable {
 
     private Boolean returned;
 
-    private int stock;
-
     public EquipRental() {
 
     }
 
-    public EquipRental(Equip equip, Boolean returned, int stock) {
+    public EquipRental(Equip equip, Boolean returned) {
         this.equip = equip;
         this.returned = returned;
-        this.stock = stock;
     }
 
     public int getId() {
@@ -54,11 +51,4 @@ public class EquipRental implements Serializable {
         this.returned = returned;
     }
 
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
 }

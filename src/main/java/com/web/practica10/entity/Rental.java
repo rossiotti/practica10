@@ -2,7 +2,6 @@ package com.web.practica10.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.Set;
 
 @Entity
@@ -12,9 +11,9 @@ public class Rental implements Serializable {
     @GeneratedValue
     private int id;
 
-    private Date date;
+    private String date;
 
-    private Date deliveryDate;
+    private String deliveryDate;
 
     @OneToOne
     private  Client client;
@@ -32,7 +31,7 @@ public class Rental implements Serializable {
     public Rental() {
     }
 
-    public Rental(Date date, Date deliveryDate, Client client, Set<EquipRental> equipRental, int equipStock, int cost, Boolean pending) {
+    public Rental(String date, String deliveryDate, Client client, Set<EquipRental> equipRental, int equipStock, int cost, Boolean pending) {
         this.date = date;
         this.deliveryDate = deliveryDate;
         this.client = client;
@@ -50,19 +49,19 @@ public class Rental implements Serializable {
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Date getDeliveryDate() {
+    public String getDeliveryDate() {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(Date deliveryDate) {
+    public void setDeliveryDate(String deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 
