@@ -19,7 +19,7 @@ public class Rental implements Serializable {
     private  Client client;
 
     @OneToMany(fetch = FetchType.EAGER)
-    private Set<EquipRental> equipRental;
+    private Set<Equip> equipRental;
 
     private int equipStock;
 
@@ -31,7 +31,7 @@ public class Rental implements Serializable {
     public Rental() {
     }
 
-    public Rental(String date, String deliveryDate, Client client, Set<EquipRental> equipRental, int equipStock, int cost, Boolean pending) {
+    public Rental(String date, String deliveryDate, Client client, Set<Equip> equipRental, int equipStock, int cost, Boolean pending) {
         this.date = date;
         this.deliveryDate = deliveryDate;
         this.client = client;
@@ -73,11 +73,11 @@ public class Rental implements Serializable {
         this.client = client;
     }
 
-    public Set<EquipRental> getEquipRental() {
+    public Set<Equip> getEquipRental() {
         return equipRental;
     }
 
-    public void setEquipRental(Set<EquipRental> equipRental) {
+    public void setEquipRental(Set<Equip> equipRental) {
         this.equipRental = equipRental;
     }
 

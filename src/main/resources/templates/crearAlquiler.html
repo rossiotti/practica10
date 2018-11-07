@@ -135,19 +135,51 @@
                 </li>
             </ol>
 
-            <form action="#" th:action="@{/crearAlquiler}" th:object="${alquiler}"  method="POST" class="form-group">
+            <form action="#" th:action="@{/crearAlquiler}" th:object="${alquiler}" method="POST" class="form-group">
                 <p>Fecha: <input type="text" class="form-control" th:field="*{date}" required/></p>
                 <p>Fecha de entrega: <input type="text" class="form-control" th:field="*{deliveryDate}" required /></p>
-                <select th:field="*{client}" class="form-control" name="selectClient">
+                <label for="selectClient">Cliente:</label>
+                <select th:field="*{client}" class="form-control" name="selectClient" id="selectClient">
                 <th:block th:each="client : ${clientes}">
-                        <option th:value="*{client}" th:text="${client.name}" th:id="${client.id}"  >...</option>
+                        <option th:value="${client.id}" th:text="${client.name}"  >...</option>
                 </th:block>
                 </select>
-                <select name="equipo" class="form-control">
-                    <th:block th:each="equipo : ${equipos}" th:multiple="#object">
-                        <option th:value="${equipo.name}" th:text="${equipo.name}"   >...</option>
+
+                <!--<table class="table">
+                    <tr>
+                        <th>Elegir</th>
+                        <th>Familia</th>
+                        <th>Nombre</th>
+                        <th>Sub-Familia</th>
+                        <th>Stock Disponible</th>
+                        <th>Stock a Rentar</th>
+                    </tr>
+
+                    <th:block th:each="equip : ${equipos}" th:field="*{equipRental}">
+
+                        <tr>
+
+                                <td><input class="form-control checkEquip"  th:value="${equip.elegido}" name="elegido"></td>
+
+
+                            <td th:text="${equip.family}">...</td>
+                            <td th:text="${equip.name}">...</td>
+                            <td th:text="${equip.subFamily}">...</td>
+                            <td th:text="${equip.stock}">...</td>
+                            <td><input id="stockRent" type="number"></td>
+                        </tr>
                     </th:block>
+
+                </table>-->
+                <!--<label for="selectEquipos">Equipos:</label>
+                <select name="selectEquipos" id="selectEquipos" multiple="multiple" class="form-control" th:field="*{equipRental}">
+                        <option th:each="equipo : ${equipos}"
+                                th:value="${equipo.id}"
+                                th:text="${equipo.name}"></option>
                 </select>
+                <div id="cantContainer">
+
+                </div>-->
                 <p>Cantidad: <input type="number" class="form-control" th:field="*{equipStock}" required/></p>
                 <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
             </form>

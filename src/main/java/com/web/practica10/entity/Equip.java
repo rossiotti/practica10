@@ -26,6 +26,26 @@ public class Equip implements Serializable {
 
     private int stock;
 
+    public int getStockRent() {
+        return stockRent;
+    }
+
+    public void setStockRent(int stockRent) {
+        this.stockRent = stockRent;
+    }
+
+    private int stockRent;
+
+    public String getElegido() {
+        return elegido;
+    }
+
+    public void setElegido(String elegido) {
+        this.elegido = elegido;
+    }
+
+    private String elegido;
+
     public int getStock() {
         return stock;
     }
@@ -39,7 +59,7 @@ public class Equip implements Serializable {
     public Equip() {
     }
 
-    public Equip(String name, int tariff, String family, String subFamily, Boolean enabled, String photo, int stock) {
+    public Equip(String name, int tariff, String family, String subFamily, Boolean enabled, String photo, int stock, int stockRent, String elegido) {
         this.name = name;
         this.tariff = tariff;
         this.family = family;
@@ -47,6 +67,8 @@ public class Equip implements Serializable {
         this.enabled = enabled;
         this.photo = photo;
         this.stock = stock;
+        this.stockRent = stockRent;
+        this.elegido = elegido;
     }
 
     public int getId() {

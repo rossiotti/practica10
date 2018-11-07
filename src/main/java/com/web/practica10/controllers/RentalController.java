@@ -1,5 +1,7 @@
 package com.web.practica10.controllers;
 
+import com.web.practica10.entity.Equip;
+import com.web.practica10.entity.EquipRental;
 import com.web.practica10.entity.Rental;
 import com.web.practica10.service.ClientService;
 import com.web.practica10.service.EquipService;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class RentalController {
@@ -47,15 +51,17 @@ public class RentalController {
             model.addObject("alquiler",new Rental());
             model.addObject("clientes",cs.listClients());
             model.addObject("equipos",equipService.listEquip(true,1));
+            model.addObject("equips",new ArrayList<Equip>());
             model.setViewName("crearAlquiler");
             return model;
         }
 
        @RequestMapping(value = "/crearAlquiler", method = RequestMethod.POST)
-        public ModelAndView submit(@ModelAttribute("alquiler")Rental rental) {
+        public ModelAndView submit(@ModelAttribute("alquiler")Rental rental,@ModelAttribute("equipos")ArrayList<Equip> equips) {
 
 
-            rentService.createRent(rental);
+           for(Equip e : equips)
+           System.out.println("*******Info "+ e.getId() +" " + e.getElegido());
 
 
             return indexEquipos();
