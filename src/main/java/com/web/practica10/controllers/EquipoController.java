@@ -28,13 +28,13 @@ public class EquipoController {
         ModelAndView model = new ModelAndView();
         List<Equip> e = equipService.listEquip(true,0);
         model.addObject("equipos",e);
-        model.setViewName("indexEquipos");
+        model.setViewName("Equipo/indexEquipos");
         return model;
     }
 
     @RequestMapping(value = "/crearEquipo", method = RequestMethod.GET)
     public ModelAndView showForm() {
-        return new ModelAndView("crearEquipo", "equipo", new Equip());
+        return new ModelAndView("Equipo/crearEquipo", "equipo", new Equip());
     }
 
     @RequestMapping(value = "/crearEquipo", method = RequestMethod.POST)

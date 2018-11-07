@@ -110,18 +110,6 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/indexUser">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Clientes</span></a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="upload.html">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Test Up</span></a>
-        </li>
-
-        <li class="nav-item">
             <a class="nav-link" href="">
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Charts</span></a>
@@ -143,40 +131,18 @@
                     <a href="">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    <a href="/indexEquipos">Equipos</a>
+                    <a href="/indexAlquiler">Alquiler</a>
                 </li>
             </ol>
 
-            <div class="btn">
-                <a class="btn btn-outline-primary" href="/crearEquipo">Crear Equipo</a>
-            </div>
-            <table class="table">
-                <tr>
-                    <th>Foto</th>
-                    <th>Nombre</th>
-                    <th>Familia</th>
-                    <th>Sub-Familia</th>
-                    <th>Tarifa</th>
-                    <th>Stock</th>
-                    <th>Accion</th>
-                </tr>
-                <th:block th:each="equipo : ${equipos}">
-
-                    <tr>
-                        <td><img th:src="@{${equipo.photo}}" style="width:128px;height:128px;"></td>
-                        <td th:text="${equipo.name}">...</td>
-                        <td th:text="${equipo.family}">...</td>
-                        <td th:text="${equipo.subFamily}">...</td>
-                        <td th:text="${equipo.tariff}">...</td>
-                        <td th:text="${equipo.stock}">...</td>
-                        <td>
-                            <div class="btn">
-                                <a href="" class="btn btn-primary"><i class="fa fa-edit"></i></a> <a class="btn btn-danger" th:href="@{/borrarUser(id=${client.id})}"><i class="fa fa-eraser"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                </th:block>
-            </table>
+            <form action="#" th:action="@{/crearAlquiler}" th:object="${alquiler}" method="POST" enctype=multipart/form-data class="form-group">
+                <p>Fecha: <input type="text" class="form-control" th:field="*{date}" required/></p>
+                <p>Fecha de entrega: <input type="text" class="form-control" th:field="*{deliveryDate}" required /></p>
+                <p>Cliente: <input type="tel" class="form-control" required th:field="*{client}" /></p>
+                <p>Cantidad: <input type="number" class="form-control" th:field="*{equipStock}" required/></p>
+                <p>Costo: <input type="number" class="form-control" th:field="*{cost}" required/></p>
+                <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+            </form>
 
         </div>
         <!-- /.container-fluid -->
@@ -214,7 +180,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <a class="btn btn-primary" href="../login.html">Logout</a>
             </div>
         </div>
     </div>
@@ -230,7 +196,7 @@
 
 <!-- Custom scripts for all pages-->
 <script th:src="@{js/sb-admin.min.js}"></script>
-
+<script th:src="@{js/main.js}"></script>
 </body>
 
 </html>
