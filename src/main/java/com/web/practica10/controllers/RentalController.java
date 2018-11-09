@@ -1,7 +1,7 @@
 package com.web.practica10.controllers;
 
 import com.web.practica10.entity.Equip;
-import com.web.practica10.entity.EquipRental;
+import com.web.practica10.entity.EquipDto;
 import com.web.practica10.entity.Rental;
 import com.web.practica10.service.ClientService;
 import com.web.practica10.service.EquipService;
@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class RentalController {
@@ -51,19 +49,50 @@ public class RentalController {
             model.addObject("alquiler",new Rental());
             model.addObject("clientes",cs.listClients());
             model.addObject("equipos",equipService.listEquip(true,1));
-            model.addObject("equips",new ArrayList<Equip>());
             model.setViewName("crearAlquiler");
             return model;
         }
 
        @RequestMapping(value = "/crearAlquiler", method = RequestMethod.POST)
-        public ModelAndView submit(@ModelAttribute("alquiler")Rental rental,@ModelAttribute("equipos")ArrayList<Equip> equips) {
+        public ModelAndView submit(@RequestParam("index") List<Integer> index,@ModelAttribute("alquiler")Rental rental,@RequestParam("checkEquip") List<Integer> checks,@RequestParam("stockEquip") List<Integer> stocks) {
+
+            ArrayList<Integer> stock = new ArrayList<>();
 
 
-           for(Equip e : equips)
-           System.out.println("*******Info "+ e.getId() +" " + e.getElegido());
+           int total = 0;
 
+           for (int i = 0; i < stocks.size(); i++) {
 
+               if(stocks.get(i) != null) {
+                   int inte = stocks.get(i);
+                   stock.add(i);
+                   total+=inte;
+                   System.out.println("Valor " + inte);
+               }
+
+           }
+
+           List<Equip> listEquip = equipService.listEquip(true, 0);
+           for (int i = 0; i < listEquip.size(); i++) {
+
+               for (int j = 0; j < checks.size() ; j++) {
+                   if(listEquip.get(i).getId() == checks.get(j)){
+                       for (int k = 0; k < stock.size() ; k++) {
+                           if(i == k){
+                               listEquip.get(i).setStockRent(stocks.get(k));
+                               listEquip.get(i).setStock(listEquip.get(i).getStock()-stocks.get(k));
+                              //Editar equipService.
+                           }
+                       }
+                   }
+               }
+
+           }
+           for (Equip e : listEquip
+                ) {
+               System.out.println(e.getStockRent());
+
+           }
             return indexEquipos();
         }
     }
