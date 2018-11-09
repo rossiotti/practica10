@@ -89,8 +89,8 @@ public class RentalController {
            for (int i = 0; i < listEquip.size(); i++) {
                for (int j = 0; j < checks.size() ; j++) {
                    if(listEquip.get(i).getId() == checks.get(j)){
-                       for (int k = 0; k < index.size() ; k++) {
-                           if(index.get(k) == i){
+                       for (int k = 0; k < stock.size() ; k++) {
+                           if(i == k){
                                Equip e = listEquip.get(i);
                                e.setStockRent(e.getStockRent()+ stock.get(k));
                                e.setStock(listEquip.get(i).getStock()-stocks.get(k));
