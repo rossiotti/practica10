@@ -7,6 +7,7 @@ import com.web.practica10.service.ClientService;
 import com.web.practica10.service.EquipService;
 import com.web.practica10.service.FileStorageService;
 import com.web.practica10.service.RentService;
+import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -73,27 +75,27 @@ public class RentalController {
            }
 
            List<Equip> listEquip = equipService.listEquip(true, 0);
+           java.util.Set<Equip> rentados = new HashSet<>();
            for (int i = 0; i < listEquip.size(); i++) {
-
                for (int j = 0; j < checks.size() ; j++) {
                    if(listEquip.get(i).getId() == checks.get(j)){
                        for (int k = 0; k < stock.size() ; k++) {
                            if(i == k){
-                               listEquip.get(i).setStockRent(stocks.get(k));
-                               listEquip.get(i).setStock(listEquip.get(i).getStock()-stocks.get(k));
-                              //Editar equipService.
+                               Equip e = listEquip.get(i);
+                               e.setStockRent(e.getStockRent()+ stock.get(k));
+                               e.setStock(listEquip.get(i).getStock()-stocks.get(k));
+                               equipService.editarStock(listEquip.get(i),listEquip.get(i).getStock()-stocks.get(k),stocks.get(k));
+                               rentados.add(e);
                            }
                        }
                    }
                }
-
            }
-           for (Equip e : listEquip
-                ) {
-               System.out.println(e.getStockRent());
-
-           }
-            return indexEquipos();
+           rental.setEquipRental(rentados);
+           rental.setEquipStock(total);
+           rental.setPending(true);
+           rentService.createRent(rental);
+           return indexEquipos();
         }
     }
 

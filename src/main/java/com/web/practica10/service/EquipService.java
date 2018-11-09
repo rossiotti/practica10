@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.beans.Transient;
 import java.util.List;
 
 @Service
@@ -32,6 +33,13 @@ public class EquipService {
 
         return equipRepository.findById(id);
 
+    }
+
+    @Transactional
+    public void editarStock(Equip equip, int stock, int stockRent){
+        equip.setStockRent(stockRent);
+        equip.setStock(stock);
+        equipRepository.save(equip);
     }
 
     public List<Equip> listEquip(Boolean aBoolean, int stock){
