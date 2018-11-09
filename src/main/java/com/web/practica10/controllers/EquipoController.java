@@ -40,7 +40,7 @@ public class EquipoController {
     @RequestMapping(value = "/crearEquipo", method = RequestMethod.POST)
     public ModelAndView submit(@RequestParam("file") MultipartFile file, @ModelAttribute("equipo")Equip equip) {
         equip.setEnabled(true);
-
+        System.out.println(file);
         if(file != null){
             String fileName = fileStorageService.storeFile(file);
             equip.setPhoto(fileName);
