@@ -23,7 +23,17 @@ public class Rental implements Serializable {
 
     private int equipStock;
 
-    private int cost;
+    private float cost;
+
+    public int getDiasRent() {
+        return diasRent;
+    }
+
+    public void setDiasRent(int diasRent) {
+        this.diasRent = diasRent;
+    }
+
+    private int diasRent;
 
     private Boolean pending;
 
@@ -31,13 +41,14 @@ public class Rental implements Serializable {
     public Rental() {
     }
 
-    public Rental(String date, String deliveryDate, Client client, Set<Equip> equipRental, int equipStock, int cost, Boolean pending) {
+    public Rental(String date, String deliveryDate, Client client, Set<Equip> equipRental, int equipStock, int cost, int diasRent, Boolean pending) {
         this.date = date;
         this.deliveryDate = deliveryDate;
         this.client = client;
         this.equipRental = equipRental;
         this.equipStock = equipStock;
         this.cost = cost;
+        this.diasRent = diasRent;
         this.pending = pending;
     }
 
@@ -89,11 +100,11 @@ public class Rental implements Serializable {
         this.equipStock = equipStock;
     }
 
-    public int getCost() {
+    public float getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(float cost) {
         this.cost = cost;
     }
 

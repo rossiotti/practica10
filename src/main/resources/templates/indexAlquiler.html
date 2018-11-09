@@ -84,6 +84,7 @@
                     <th>Cliente</th>
                     <th>Fecha Registrada</th>
                     <th>Fecha de Entrega</th>
+                    <th>Dias</th>
                     <th>Cantidad de Equipos</th>
                     <th>Equipos</th>
                 </tr>
@@ -93,6 +94,7 @@
                         <td th:text="${alquiler.client.name}">...</td>
                         <td th:text="${alquiler.date}">...</td>
                         <td th:text="${alquiler.deliveryDate}">...</td>
+                        <td th:text="${alquiler.diasRent}">...</td>
                         <td th:text="${alquiler.equipStock}">...</td>
                         <td>
                             <ul>
@@ -120,7 +122,7 @@
         <footer class="sticky-footer">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright © Your Website 2018</span>
+                    <span>Copyright © Capsule Corp 2018</span>
                 </div>
             </div>
         </footer>

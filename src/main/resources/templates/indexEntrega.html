@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Alquileres</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{css/sb-admin.css}"/>
+
+    <!-- Page level plugin CSS-->
+    <link th:href="@{css/dataTables.bootstrap4.css}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+    <img th:src="@{uploads/kh.png}" style="width:64px;height:64px;">
+    <a class="navbar-brand mr-1" href="">Kamehaus Rentals </a>
+
+
+
+    <!-- Navbar -->
+
+</nav>
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="sidebar navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="/admin">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/indexUser">
+                <i class="fas fa-fw fa-user"></i>
+                <span>Clientes</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/indexEquipos">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Equipos</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/indexAlquiler">
+                <i class="fas fa-fw fa-boxes"></i>
+                <span>Alquiler</span></a>
+        </li>
+    </ul>
+
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <a href="/indexAlquiler">Alquileres</a>
+                </li>
+            </ol>
+
+            <div class="btn">
+                <a class="btn btn-outline-primary" href="/crearAlquiler">Nuevo Alquiler</a>
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Cliente</th>
+                    <th>Fecha Registrada</th>
+                    <th>Fecha de Entrega</th>
+                    <th>Cantidad de Equipos</th>
+                    <th>Equipos</th>
+                </tr>
+                <th:block th:each="alquiler : ${alquileres}">
+
+                    <tr>
+                        <td th:text="${alquiler.client.name}">...</td>
+                        <td th:text="${alquiler.date}">...</td>
+                        <td th:text="${alquiler.deliveryDate}">...</td>
+                        <td th:text="${alquiler.equipStock}">...</td>
+                        <td>
+                            <ul>
+                                <th:block th:each="equip : ${alquiler.equipRental}">
+
+                                    <li th:text="${equip.name} + ' - '+${equip.stockRent} +' Unidades'"> </li>
+
+                                </th:block>
+                            </ul>
+                        </td>
+
+                        <td>
+                            <div class="btn">
+                                <a class="btn btn-danger" th:href="@{/borrarUser(id=${alquiler.id})}"><i class="fa fa-eraser"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </th:block>
+            </table>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © Capsule Corp 2018</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="../login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{js/jquery.easing.min.js}"></script>
+
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{js/sb-admin.min.js}"></script>
+
+</body>
+
+</html>

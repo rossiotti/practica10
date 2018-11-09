@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 public class RentalController {
@@ -36,9 +37,18 @@ public class RentalController {
         private FileStorageService fileStorageService;
 
         @RequestMapping(value = "/indexAlquiler", method = RequestMethod.GET)
-        public ModelAndView indexEquipos() {
+        public ModelAndView indexEquipos() throws ParseException {
             ModelAndView model = new ModelAndView();
             List<Rental> e = rentService.rentalList();
+            for (Rental r:e
+                 ) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                Date firstDate = sdf.parse(r.getDeliveryDate());
+                Date secondDate = sdf.parse(r.getDate());
+                long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+                long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+                r.setDiasRent(((int) diff));
+            }
             model.addObject("alquileres",e);
             model.setViewName("indexAlquiler");
             return model;
@@ -50,13 +60,13 @@ public class RentalController {
 
             model.addObject("alquiler",new Rental());
             model.addObject("clientes",cs.listClients());
-            model.addObject("equipos",equipService.listEquip(true,1));
+            model.addObject("equipos",equipService.listEquip(true,0));
             model.setViewName("crearAlquiler");
             return model;
         }
 
        @RequestMapping(value = "/crearAlquiler", method = RequestMethod.POST)
-        public ModelAndView submit(@RequestParam("index") List<Integer> index,@ModelAttribute("alquiler")Rental rental,@RequestParam("checkEquip") List<Integer> checks,@RequestParam("stockEquip") List<Integer> stocks) {
+        public ModelAndView submit(@RequestParam("index") List<Integer> index,@ModelAttribute("alquiler")Rental rental,@RequestParam("checkEquip") List<Integer> checks,@RequestParam("stockEquip") List<Integer> stocks) throws ParseException {
 
             ArrayList<Integer> stock = new ArrayList<>();
 
