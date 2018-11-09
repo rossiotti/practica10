@@ -29,6 +29,10 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile("org.springframework.boot:spring-boot-starter-security")
 	compile("org.hibernate.validator:hibernate-validator")
+	//módulo para trabajar con Spring session.
+	compile('org.springframework.session:spring-session-core')
+	//módulo para trabajar con Hazelcast.
+	compile('org.springframework.session:spring-session-hazelcast')
 	implementation('org.springframework.boot:spring-boot-starter-web')
 	runtimeOnly('com.h2database:h2')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')

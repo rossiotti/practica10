@@ -1,4 +1,4 @@
-package com.web.practica10;
+package com.web.practica10.config;
 
 import java.io.IOException;
 import java.util.Collection;

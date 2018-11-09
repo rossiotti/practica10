@@ -15,7 +15,7 @@ import org.springframework.context.ApplicationContext;
         FileStorageProperties.class
 })
 public class Practica10Application {
-
+    public static final String USE_HAZELCAST = "true";
 	public static void main(String[] args) {
         ApplicationContext applicationContext = SpringApplication.run(Practica10Application.class, args);
 
