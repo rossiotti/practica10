@@ -14,7 +14,7 @@ public class Equip implements Serializable {
 
     private String name;
 
-    private int tariff;
+    private float tariff;
 
     private String family;
 
@@ -87,11 +87,11 @@ public class Equip implements Serializable {
         this.name = name;
     }
 
-    public int getTariff() {
+    public float getTariff() {
         return tariff;
     }
 
-    public void setTariff(int tariff) {
+    public void setTariff(float tariff) {
         this.tariff = tariff;
     }
 

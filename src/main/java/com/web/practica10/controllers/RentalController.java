@@ -40,19 +40,30 @@ public class RentalController {
         public ModelAndView indexEquipos() throws ParseException {
             ModelAndView model = new ModelAndView();
             List<Rental> e = rentService.rentalList();
-            for (Rental r:e
-                 ) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-                Date firstDate = sdf.parse(r.getDeliveryDate());
-                Date secondDate = sdf.parse(r.getDate());
-                long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
-                long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-                r.setDiasRent(((int) diff));
-            }
             model.addObject("alquileres",e);
             model.setViewName("indexAlquiler");
             return model;
         }
+
+    @RequestMapping(value = "/indexEntrega", method = RequestMethod.GET)
+    public ModelAndView indexEntrega() throws ParseException {
+        ModelAndView model = new ModelAndView();
+        float c = 0;
+        List<Rental> e = rentService.rentalListTodo();
+        for (Rental r:e
+                ) {
+            for (Equip equip:r.getEquipRental()
+                 ) {
+                c+= equip.getTariff() * r.getDiasRent();
+            }
+            rentService.setCosto(r,c);
+
+        }
+
+        model.addObject("alquileres",e);
+        model.setViewName("indexEntrega");
+        return model;
+    }
 
         @RequestMapping(value = "/crearAlquiler", method = RequestMethod.GET)
         public ModelAndView showForm() {
@@ -89,18 +100,24 @@ public class RentalController {
            for (int i = 0; i < listEquip.size(); i++) {
                for (int j = 0; j < checks.size() ; j++) {
                    if(listEquip.get(i).getId() == checks.get(j)){
-                       for (int k = 0; k < stock.size() ; k++) {
+                       for (int k = 0; k < stocks.size() ; k++) {
                            if(i == k){
                                Equip e = listEquip.get(i);
-                               e.setStockRent(e.getStockRent()+ stock.get(k));
+                               e.setStockRent(e.getStockRent()+ stocks.get(k));
                                e.setStock(listEquip.get(i).getStock()-stocks.get(k));
-                               equipService.editarStock(listEquip.get(i),listEquip.get(i).getStock()-stocks.get(k),stocks.get(k));
+                               equipService.editarStock(e,e.getStock(),e.getStockRent());
                                rentados.add(e);
                            }
                        }
                    }
                }
            }
+           SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+           Date firstDate = sdf.parse(rental.getDeliveryDate());
+           Date secondDate = sdf.parse(rental.getDate());
+           long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+           long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+           rental.setDiasRent((int) diff);
            rental.setEquipRental(rentados);
            rental.setEquipStock(total);
            rental.setPending(true);

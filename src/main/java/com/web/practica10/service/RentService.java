@@ -26,6 +26,24 @@ public class RentService {
         return rentRepositoy.findAllByPendingOrderByDeliveryDateDesc(true);
     }
 
+    @Transactional
+    public void setDias(Rental rental, int dias){
+
+        rental.setDiasRent(dias);
+        rentRepositoy.save(rental);
+    }
+
+    @Transactional
+    public void setCosto(Rental rental, float cost){
+
+        rental.setCost(cost);
+        rentRepositoy.save(rental);
+    }
+
+    public List<Rental> rentalListTodo() {
+
+        return rentRepositoy.findAll();
+    }
     public List<Rental> clientList(Client client){
 
         return rentRepositoy.findAllByClient(client);
