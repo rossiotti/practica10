@@ -1,26 +1,47 @@
 package com.web.practica10.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 public class Equip implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idequipo", unique = true, nullable = false)
     private int id;
 
     private String name;
 
     private float tariff;
 
-    private String family;
+    @OneToOne
+    private Familia family;
 
-    private String subFamily;
+    @OneToOne
+    private Familia subFamily;
 
     private Boolean enabled;
+
+    private int diasRentados;
+
+    private float costoRenta;
+
+    public int getDiasRentados() {
+        return diasRentados;
+    }
+
+    public void setDiasRentados(int diasRentados) {
+        this.diasRentados = diasRentados;
+    }
+
+    public float getCostoRenta() {
+        return costoRenta;
+    }
+
+    public void setCostoRenta(float costoRenta) {
+        this.costoRenta = costoRenta;
+    }
 
     private String photo;
 
@@ -59,12 +80,14 @@ public class Equip implements Serializable {
     public Equip() {
     }
 
-    public Equip(String name, int tariff, String family, String subFamily, Boolean enabled, String photo, int stock, int stockRent, String elegido) {
+    public Equip(String name, int tariff, Familia family, Familia subFamily, Boolean enabled, int diasRentados, float costoRenta, String photo, int stock, int stockRent, String elegido) {
         this.name = name;
         this.tariff = tariff;
         this.family = family;
         this.subFamily = subFamily;
         this.enabled = enabled;
+        this.diasRentados = diasRentados;
+        this.costoRenta = costoRenta;
         this.photo = photo;
         this.stock = stock;
         this.stockRent = stockRent;
@@ -95,19 +118,19 @@ public class Equip implements Serializable {
         this.tariff = tariff;
     }
 
-    public String getFamily() {
+    public Familia getFamily() {
         return family;
     }
 
-    public void setFamily(String family) {
+    public void setFamily(Familia family) {
         this.family = family;
     }
 
-    public String getSubFamily() {
+    public Familia getSubFamily() {
         return subFamily;
     }
 
-    public void setSubFamily(String subFamily) {
+    public void setSubFamily(Familia subFamily) {
         this.subFamily = subFamily;
     }
 

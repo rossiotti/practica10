@@ -54,6 +54,9 @@
             <a class="nav-link" href="/indexEquipos">
                 <i class="fas fa-fw fa-wrench"></i>
                 <span>Equipos</span></a>
+            <a class="nav-link" href="/indexFamilia">
+                <i class="fas fa-fw fa-plus"></i>
+                <span>Familias</span></a>
         </li>
 
         <li class="nav-item">
@@ -95,8 +98,9 @@
                     <tr>
                         <td><img th:src="@{${equipo.photo}}" style="width:128px;height:128px;"></td>
                         <td th:text="${equipo.name}">...</td>
-                        <td th:text="${equipo.family}">...</td>
-                        <td th:text="${equipo.subFamily}">...</td>
+                        <td th:text="${equipo.family.nombre}">...</td>
+                        <td th:if="${equipo.subFamily == null}">No tiene</td>
+                        <td th:if="${equipo.subFamily != null && equipo.subFamily.nombre != null}" th:text="${equipo.subFamily.nombre}">No tiene</td>
                         <td th:text="${equipo.tariff}">...</td>
                         <td th:text="${equipo.stock}">...</td>
                         <td>

@@ -9,12 +9,25 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Alquileres</title>
+    <title>Crear Alquiler</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" th:href="@{css/sb-admin.css}"/>
 
+    <link rel="stylesheet" type="text/css" th:href="@{css/sb-admin.css}"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker({
+                dateFormat: "dd/mm/yy",
+                defaultDate: +1,
+                minDate: +1
+            });
+
+        } );
+    </script>
     <!-- Page level plugin CSS-->
     <link th:href="@{css/dataTables.bootstrap4.css}" rel="stylesheet">
 
@@ -75,48 +88,52 @@
                     <a href="">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    <a href="/indexAlquiler">Alquileres</a>
+                    <a href="/indexAlquiler">Alquiler</a>
                 </li>
             </ol>
 
-            <div class="btn">
-                <a class="btn btn-outline-primary" href="/crearAlquiler">Nuevo Alquiler</a>
-            </div>
-            <table class="table">
-                <tr>
-                    <th>Cliente</th>
-                    <th>Fecha Registrada</th>
-                    <th>Fecha de Entrega</th>
-                    <th>Dias Maximos</th>
-                    <th>Cantidad de Equipos</th>
-                    <th>Equipos</th>
-                </tr>
-                <th:block th:each="alquiler : ${alquileres}">
+            <form action="#" th:action="@{/crearEntrega}" th:object="${alquiler}" method="POST" class="form-group">
+                <dl>
+                    <dt>Cliente</dt>
+                    <dd th:text="${alquiler.client.name}"></dd>
+                    <dt id="dias">Dias</dt>
+                    <dd th:text="${alquiler.diasRent}"></dd>
+                    <dt>Equipos a Devolver</dt>
 
-                    <tr>
-                        <td th:text="${alquiler.client.name}">...</td>
-                        <td th:text="${alquiler.date}">...</td>
-                        <td th:text="${alquiler.deliveryDate}">...</td>
-                        <td th:text="${alquiler.diasRent}">...</td>
-                        <td th:text="${alquiler.equipStock}">...</td>
-                        <td>
-                            <dl>
-                            <th:block th:each="equip : ${alquiler.equipRental}">
+                            <dd>
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>Elegir</th>
+                                        <th>Familia</th>
+                                        <th>Equipo</th>
+                                        <th>Unidades Rentadas</th>
+                                        <th>Costo por Dia</th>
+                                        <th>Dias Rentados</th>
+                                        <th>Costo Actual</th>
 
-                                <dd th:text="${equip.name} + ' - '+${equip.stockRent} +' Unidades'"> </dd>
+                                    </tr>
 
-                            </th:block>
-                            </dl>
-                        </td>
+                                        <th:block th:each="equip, iter: ${alquiler.equipRental}">
+                                            <tr>
+                                            <td><input type="checkbox" th:name="chk" class="form-control" th:value="${equip.id}"></td>
+                                            <td th:text="${equip.family}"></td>
+                                            <td th:text="${equip.name}"></td>
+                                            <td id="rent" th:text="${equip.stockRent}"></td>
+                                            <td id="cost" th:text="${equip.tariff}"></td>
+                                                <td th:text="${equip.diasRentados}"></td>
+                                                <td th:text="${equip.costoRenta}"></td>
+                                            </tr>
+                                        </th:block>
 
-                        <td>
-                            <div class="btn">
-                                <a class="btn btn-outline-primary" th:href="@{/crearEntrega(id=${alquiler.id})}">Entrega <i class="fa fa-receipt"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                </th:block>
-            </table>
+                                </table>
+
+                            </dd>
+
+                    <dt>Costo</dt>
+                    <dd id="total" th:field="${alquiler.cost}"></dd>
+                </dl>
+                <p><input type="submit" value="Crear" class="form-control" />
+            </form>
 
         </div>
         <!-- /.container-fluid -->
@@ -160,6 +177,7 @@
     </div>
 </div>
 
+
 <!-- Bootstrap core JavaScript-->
 <script th:src="@{vendor/jquery/jquery.min.js}"></script>
 <script th:src="@{js/bootstrap.bundle.min.js}"></script>
@@ -170,7 +188,7 @@
 
 <!-- Custom scripts for all pages-->
 <script th:src="@{js/sb-admin.min.js}"></script>
-
+<script th:src="@{js/main.js}"></script>
 </body>
 
 </html>

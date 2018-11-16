@@ -2,6 +2,7 @@ package com.web.practica10.controllers;
 
 import com.web.practica10.entity.Equip;
 import com.web.practica10.service.EquipService;
+import com.web.practica10.service.FamiliaService;
 import com.web.practica10.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,13 @@ public class EquipoController {
     @Autowired
     private FileStorageService fileStorageService;
 
+    @Autowired
+    private FamiliaService familiaService;
+
+
+
+
+
     @RequestMapping(value = "/indexEquipos", method = RequestMethod.GET)
     public ModelAndView indexEquipos() {
         ModelAndView model = new ModelAndView();
@@ -34,7 +42,13 @@ public class EquipoController {
 
     @RequestMapping(value = "/crearEquipo", method = RequestMethod.GET)
     public ModelAndView showForm() {
-        return new ModelAndView("Equipo/crearEquipo", "equipo", new Equip());
+
+        ModelAndView model = new ModelAndView();
+        model.addObject("familias",familiaService.getFamiliasPadre(true));
+        model.addObject("equipo",new Equip());
+        model.addObject("subFamilias",familiaService.getSubFamilias(true));
+        model.setViewName("Equipo/crearEquipo");
+        return model;
     }
 
     @RequestMapping(value = "/crearEquipo", method = RequestMethod.POST)
