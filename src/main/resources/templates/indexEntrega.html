@@ -62,6 +62,9 @@
             <a class="nav-link" href="/indexAlquiler">
                 <i class="fas fa-fw fa-boxes"></i>
                 <span>Alquiler</span></a>
+            <a class="nav-link" href="/indexEntrega">
+                <i class="fas fa-fw fa-receipt"></i>
+                <span>Entregas</span></a>
         </li>
     </ul>
 
@@ -75,7 +78,7 @@
                     <a href="">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    <a href="/indexAlquiler">Alquileres</a>
+                    <a href="/indexEntrega">Entregas</a>
                 </li>
             </ol>
 
@@ -87,8 +90,8 @@
                     <th>Cliente</th>
                     <th>Fecha Registrada</th>
                     <th>Fecha de Entrega</th>
-                    <th>Cantidad de Equipos</th>
                     <th>Equipos</th>
+                    <th>Costo</th>
                 </tr>
                 <th:block th:each="alquiler : ${alquileres}">
 
@@ -96,22 +99,17 @@
                         <td th:text="${alquiler.client.name}">...</td>
                         <td th:text="${alquiler.date}">...</td>
                         <td th:text="${alquiler.deliveryDate}">...</td>
-                        <td th:text="${alquiler.equipStock}">...</td>
                         <td>
                             <ul>
                                 <th:block th:each="equip : ${alquiler.equipRental}">
 
-                                    <li th:text="${equip.name} + ' - '+${equip.stockRent} +' Unidades'"> </li>
+                                    <li th:text="${equip.equip.name} + ' - '+${equip.cantidadRentada} +' Unidades'"> </li>
 
                                 </th:block>
                             </ul>
                         </td>
 
-                        <td>
-                            <div class="btn">
-                                <a class="btn btn-danger" th:href="@{/borrarUser(id=${alquiler.id})}"><i class="fa fa-eraser"></i></a>
-                            </div>
-                        </td>
+                        <td th:text="${alquiler.cost}"></td>
                     </tr>
                 </th:block>
             </table>

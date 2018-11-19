@@ -21,9 +21,17 @@ public class RentService {
         rentRepositoy.save(rental);
     }
 
-    public List<Rental> rentalList(){
+    @Transactional
+    public void updateStatus(Rental rental,Boolean bo){
 
-        return rentRepositoy.findAllByPendingOrderByDeliveryDateDesc(true);
+        rental.setPending(bo);
+        rentRepositoy.save(rental);
+    }
+
+
+    public List<Rental> rentalList(Boolean b){
+
+        return rentRepositoy.findAllByPendingOrderByDeliveryDateDesc(b);
     }
 
     @Transactional
@@ -40,10 +48,6 @@ public class RentService {
         rentRepositoy.save(rental);
     }
 
-    public List<Rental> rentalListTodo() {
-
-        return rentRepositoy.findAll();
-    }
     public List<Rental> clientList(Client client){
 
         return rentRepositoy.findAllByClient(client);

@@ -25,7 +25,7 @@ public class Equip implements Serializable {
 
     private int diasRentados;
 
-    private float costoRenta;
+
 
     public int getDiasRentados() {
         return diasRentados;
@@ -33,14 +33,6 @@ public class Equip implements Serializable {
 
     public void setDiasRentados(int diasRentados) {
         this.diasRentados = diasRentados;
-    }
-
-    public float getCostoRenta() {
-        return costoRenta;
-    }
-
-    public void setCostoRenta(float costoRenta) {
-        this.costoRenta = costoRenta;
     }
 
     private String photo;
@@ -80,18 +72,16 @@ public class Equip implements Serializable {
     public Equip() {
     }
 
-    public Equip(String name, int tariff, Familia family, Familia subFamily, Boolean enabled, int diasRentados, float costoRenta, String photo, int stock, int stockRent, String elegido) {
+    public Equip(String name, int tariff, Familia family, Familia subFamily, Boolean enabled, int diasRentados, String photo, int stock, int stockRent) {
         this.name = name;
         this.tariff = tariff;
         this.family = family;
         this.subFamily = subFamily;
         this.enabled = enabled;
         this.diasRentados = diasRentados;
-        this.costoRenta = costoRenta;
         this.photo = photo;
         this.stock = stock;
         this.stockRent = stockRent;
-        this.elegido = elegido;
     }
 
     public int getId() {

@@ -3,6 +3,7 @@ package com.web.practica10.service;
 import com.web.practica10.entity.Equip;
 import com.web.practica10.entity.EquipRental;
 import com.web.practica10.repositories.EquipRentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,10 +14,28 @@ import java.util.Set;
 @Service
 public class EquipRentService {
 
+    @Autowired
     EquipRentRepository equipRentRepository;
 
     @Transactional
     public void createEquipRent(EquipRental equipRental) {
+
+        equipRentRepository.save(equipRental);
+    }
+
+    @Transactional
+    public void updateEquipRent(EquipRental equipRental,float cost, int days) {
+
+        equipRental.setCostoRenta(cost);
+        equipRental.setDias(days);
+
+        equipRentRepository.save(equipRental);
+    }
+
+    @Transactional
+    public void updateStatus(EquipRental equipRental,Boolean status) {
+
+        equipRental.setReturned(status);
 
         equipRentRepository.save(equipRental);
     }

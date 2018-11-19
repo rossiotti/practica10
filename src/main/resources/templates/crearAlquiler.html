@@ -75,6 +75,9 @@
             <a class="nav-link" href="/indexAlquiler">
                 <i class="fas fa-fw fa-boxes"></i>
                 <span>Alquiler</span></a>
+            <a class="nav-link" href="/indexEntrega">
+                <i class="fas fa-fw fa-receipt"></i>
+                <span>Entregas</span></a>
         </li>
     </ul>
 
@@ -120,9 +123,10 @@
                         <tr>
                             <td><input class="form-control" th:name="checkEquip" type="checkbox" th:value="${equip.id}" ></td>
                             <td><img th:src="@{${equip.photo}}" style="width:128px;height:128px;"></td>
-                            <td th:text="${equip.family}">...</td>
+                            <td th:text="${equip.family.nombre}">...</td>
                             <td th:text="${equip.name}">...</td>
-                            <td th:text="${equip.subFamily}">...</td>
+                            <td th:if="${equip.subFamily == null}">No tiene</td>
+                            <td th:if="${equip.subFamily != null && equip.subFamily.nombre != null}" th:text="${equip.subFamily.nombre}">No tiene</td>
                             <td th:text="${equip.tariff}">...</td>
                             <td th:text="${equip.stock}">...</td>
                             <td><input th:name="stockEquip" value="0" type="number" class="form-control" th:max="${equip.stock}" th:min="0"></td>

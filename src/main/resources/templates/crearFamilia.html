@@ -61,6 +61,9 @@
             <a class="nav-link" href="/indexAlquiler">
                 <i class="fas fa-fw fa-boxes"></i>
                 <span>Alquiler</span></a>
+            <a class="nav-link" href="/indexEntrega">
+                <i class="fas fa-fw fa-receipt"></i>
+                <span>Entregas</span></a>
         </li>
     </ul>
 
@@ -79,13 +82,13 @@
             </ol>
 
             <form action="#" th:action="@{/crearFamilia}" th:object="${familia}" method="POST" enctype=multipart/form-data class="form-group">
-                <p>Nombre: <input type="text" class="form-control" th:field="*{nombre}" required/></p>
-                <p>Descripcion: <input type="text" class="form-control" th:field="*{descripcion}" required /></p>
-                <p>Familia Mayor: <select th:field="*{hijo}" >
+                <p>Familia Mayor: <select class="form-control" th:field="*{hijo}" >
                     <option th:value="null">No tiene</option>
                     <th:block th:each="fam : ${familias}" class="form-control">
                         <option th:value="${fam.id}" th:text="${fam.nombre}"></option>
                     </th:block></select></p>
+                <p>Nombre: <input type="text" class="form-control" th:field="*{nombre}" required/></p>
+                <p>Descripcion: <input type="text" class="form-control" th:field="*{descripcion}" required /></p>
                 <p><input type="submit" value="Crear" class="form-control" />
             </form>
 

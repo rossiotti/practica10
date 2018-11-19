@@ -61,6 +61,9 @@
             <a class="nav-link" href="/indexAlquiler">
                 <i class="fas fa-fw fa-boxes"></i>
                 <span>Alquiler</span></a>
+            <a class="nav-link" href="/indexEntrega">
+                <i class="fas fa-fw fa-receipt"></i>
+                <span>Entregas</span></a>
         </li>
     </ul>
 
@@ -84,7 +87,7 @@
                     <th:block th:each="fam : ${familias}">
                         <option th:value="${fam.id}" th:text="${fam.nombre}"  >...</option>
                     </th:block>
-                </select></p>
+                </select> <a class="btn btn-primary" href="/crearFamilia">Crear Familia</a></p>
 
                 <p>Nombre: <input type="text" class="form-control" th:field="*{name}" required /></p>
                 <p>Sub-Familia:

@@ -1,20 +1,48 @@
 package com.web.practica10.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 public class EquipRental implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idequip_rent", unique = true, nullable = false)
     private int id;
 
     @OneToOne
     private Equip equip;
+
+    public int getCantidadRentada() {
+        return cantidadRentada;
+    }
+
+    public void setCantidadRentada(int cantidadRentada) {
+        this.cantidadRentada = cantidadRentada;
+    }
+
+    private int cantidadRentada;
+
+    public int getDias() {
+        return dias;
+    }
+
+    public void setDias(int dias) {
+        this.dias = dias;
+    }
+
+    private int dias;
+
+    public float getCostoRenta() {
+        return costoRenta;
+    }
+
+    public void setCostoRenta(float costoRenta) {
+        this.costoRenta = costoRenta;
+    }
+
+    private float costoRenta;
 
     private Boolean returned;
 
@@ -22,8 +50,11 @@ public class EquipRental implements Serializable {
 
     }
 
-    public EquipRental(Equip equip, Boolean returned) {
+    public EquipRental(Equip equip, int cantidadRentada, int dias, float costoRenta, Boolean returned) {
         this.equip = equip;
+        this.cantidadRentada = cantidadRentada;
+        this.dias = dias;
+        this.costoRenta = costoRenta;
         this.returned = returned;
     }
 

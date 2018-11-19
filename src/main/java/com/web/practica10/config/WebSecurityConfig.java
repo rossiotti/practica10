@@ -53,17 +53,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/user").access("hasRole('ROLE_USER')");
 
         // For ADMIN only.
-        http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/admin","/index**","/crear**").access("hasRole('ROLE_ADMIN')");
 
         // Config for Login Form
         http.authorizeRequests().and().formLogin()//
                 // Submit URL of login page.
                 .loginPage("/login")//
-                .usernameParameter("username")//
+                .usernameParameter("username")
                 .passwordParameter("password")
                 .and().formLogin().successHandler(successHandler)
                 // Config for Logout Page
                 .and().logout().permitAll();
+
 
    /* @Override
     protected void configure(HttpSecurity http) throws Exception {
