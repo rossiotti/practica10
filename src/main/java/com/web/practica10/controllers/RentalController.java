@@ -100,7 +100,10 @@ public class RentalController {
             }
         }
         if(check == rental.getEquipRental().size()){
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = new Date();
             rentService.setCosto(rental,total);
+            rentService.updateDate(rental,dateFormat.format(date));
             rentService.updateStatus(rental,false);
         }
 

@@ -12,6 +12,7 @@ public interface RentRepositoy extends JpaRepository<Rental, Integer> {
 
     Rental findById(int id);
 
+
     List<Rental> findAllByClient(Client client);
 
     List<Rental> findAllByPendingOrderByDeliveryDateDesc(Boolean aBoolean);

@@ -36,6 +36,9 @@ public class FamiliaService {
         return familiaRepository.findAllByEnabled(b);
     }
 
+    public Familia findFamilia(int id){
+        return familiaRepository.findById(id);
+    }
     public List<Familia> getFamiliasPadre(Boolean b){
 
         return familiaRepository.findAllByEnabledAndHijoNull(b);
