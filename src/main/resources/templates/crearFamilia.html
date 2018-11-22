@@ -22,15 +22,28 @@
 
 <body id="page-top">
 
+
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
     <img th:src="@{uploads/kh.png}" style="width:64px;height:64px;">
-    <a class="navbar-brand mr-1" href="">Kamehaus Rentals </a>
+    <a class="navbar-brand mr-1" href="">Kamehaus Rentals</a>
+    <br>
 
 
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a id="es"> <img th:src="@{uploads/do.png}"></a>
+            </li>
+            <li class="nav-item">
+                <a id="en"><img th:src="@{uploads/us.png}"></a>
+            </li>
+        </ul>
+    </div>
 
     <!-- Navbar -->
 
 </nav>
+
 <div id="wrapper">
 
     <!-- Sidebar -->
@@ -40,31 +53,39 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>
+
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/indexUser">
                 <i class="fas fa-fw fa-user"></i>
-                <span>Clientes</span></a>
+                <span th:text="#{cliente}"></span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/indexEquipos">
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>Equipos</span></a>
+                <span th:text="#{equipo}"></span></a>
             <a class="nav-link" href="/indexFamilia">
                 <i class="fas fa-fw fa-plus"></i>
-                <span>Familias</span></a>
+                <span th:text="#{familia}"></span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/indexAlquiler">
                 <i class="fas fa-fw fa-boxes"></i>
-                <span>Alquiler</span></a>
+                <span th:text="#{alquiler}">Alquiler</span></a>
             <a class="nav-link" href="/indexEntrega">
                 <i class="fas fa-fw fa-receipt"></i>
-                <span>Entregas</span></a>
+                <span th:text="#{entrega}"></span></a>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/historial">
+                <i class="fas fa-fw fa-history"></i>
+                <span th:text="#{historial}"></span></a>
+        </li>
+
     </ul>
 
     <div id="content-wrapper">
@@ -82,14 +103,19 @@
             </ol>
 
             <form action="#" th:action="@{/crearFamilia}" th:object="${familia}" method="POST" enctype=multipart/form-data class="form-group">
-                <p>Familia Mayor: <select class="form-control" th:field="*{hijo}" >
+               <label th:text="#{famMa}" for="hijo"></label>
+                <select class="form-control" th:field="*{hijo}" >
                     <option th:value="null">No tiene</option>
                     <th:block th:each="fam : ${familias}" class="form-control">
                         <option th:value="${fam.id}" th:text="${fam.nombre}"></option>
-                    </th:block></select></p>
-                <p>Nombre: <input type="text" class="form-control" th:field="*{nombre}" required/></p>
-                <p>Descripcion: <input type="text" class="form-control" th:field="*{descripcion}" required /></p>
-                <p><input type="submit" value="Crear" class="form-control" />
+                    </th:block></select>
+                <label th:text="#{nombre}" for="nombre"></label>
+                <input type="text" class="form-control" th:field="*{nombre}" required/>
+
+                <label th:text="#{descripcion}" for="descripcion"></label>
+
+                <input type="text" class="form-control" th:field="*{descripcion}" required />
+                <input type="submit" th:value="#{crear}" class="form-control" />
             </form>
 
         </div>
@@ -140,6 +166,23 @@
 
 <!-- Core plugin JavaScript-->
 <script th:src="@{js/jquery.easing.min.js}"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#es").click(function () {
+            var selectedOption = $(this).attr('id');
+            window.location.replace('crearFamilia?lang=' + selectedOption);
+
+        });
+        $("#en").click(function () {
+            var selectedOption = $(this).attr('id');
+            window.location.replace('crearFamilia?lang=' + selectedOption);
+
+        });
+    });
+</script>
 
 
 <!-- Custom scripts for all pages-->

@@ -60,8 +60,6 @@ public class DashboardController {
             }
         }
 
-        int chk = 0;
-        int chk2 = 0;
         for (int i = 0; i < famDias.size() ; i++) {
             for (int j = i+1; j <famDias.size() ; j++) {
                 if(famDias.get(i).getLabel().equals(famDias.get(j).getLabel())){
@@ -84,7 +82,6 @@ public class DashboardController {
         ModelAndView model = new ModelAndView();
         model.setViewName("historial");
         model.addObject("clientes",cs.listClients());
-        mod.addAttribute("puerto", ""+request.getLocalPort());
         return model;
     }
 
@@ -95,8 +92,8 @@ public class DashboardController {
 
         List<Rental> rentalList = rentService.rentalsByClient(cs.findClient(id));
 
-        model.setViewName("admin");
-        model.addObject("familias",cs.listClients());
+        model.setViewName("historial");
+        model.addObject("clientes",cs.listClients());
         model.addObject("rentals",rentalList);
         return model;
 

@@ -32,6 +32,27 @@
 
 </nav>
 
+<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+    <img th:src="@{uploads/kh.png}" style="width:64px;height:64px;">
+    <a class="navbar-brand mr-1" href="">Kamehaus Rentals</a>
+    <br>
+
+
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a id="es"> <img th:src="@{uploads/do.png}"></a>
+            </li>
+            <li class="nav-item">
+                <a id="en"><img th:src="@{uploads/us.png}"></a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Navbar -->
+
+</nav>
+
 <div id="wrapper">
 
     <!-- Sidebar -->
@@ -41,32 +62,41 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>
+
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/indexUser">
                 <i class="fas fa-fw fa-user"></i>
-                <span>Clientes</span></a>
+                <span th:text="#{cliente}"></span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/indexEquipos">
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>Equipos</span></a>
+                <span th:text="#{equipo}"></span></a>
             <a class="nav-link" href="/indexFamilia">
                 <i class="fas fa-fw fa-plus"></i>
-                <span>Familias</span></a>
+                <span th:text="#{familia}"></span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/indexAlquiler">
                 <i class="fas fa-fw fa-boxes"></i>
-                <span>Alquiler</span></a>
+                <span th:text="#{alquiler}">Alquiler</span></a>
             <a class="nav-link" href="/indexEntrega">
                 <i class="fas fa-fw fa-receipt"></i>
-                <span>Entregas</span></a>
+                <span th:text="#{entrega}"></span></a>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/historial">
+                <i class="fas fa-fw fa-history"></i>
+                <span th:text="#{historial}"></span></a>
+        </li>
+
     </ul>
+
 
     <div id="content-wrapper">
 
@@ -77,20 +107,20 @@
                 <li class="breadcrumb-item">
                     <a href="">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active">Blank Page</li>
+                <li class="breadcrumb-item active" th:text="#{historial}">Blank Page</li>
             </ol>
 
             <!-- Page Content -->
             <h1>Historial</h1>
             <hr>
             <div class="container">
-                <h3>Cliente:</h3>
+                <h3 th:text="#{cli}">Cliente:</h3>
                 <form class="form-group" th:action="@{/historial}" method="POST">
 
                     <div>
                         <div class="input-group">
                             <select class="form-control" th:name="selectClient">
-                                <option>Elige una Opcion...</option>
+                                <option>...</option>
                                 <th:block th:each="client : ${clientes}">
                                     <option th:value="${client.id}" th:text="${client.name}"></option>
                                 </th:block>
@@ -98,7 +128,7 @@
                         </div>
                     </div>
                     <div class="fa-pull-left">
-                        <input type="submit" value="Buscar historial" class="form-control" />
+                        <input type="submit" th:value="#{buscar}" class="form-control" />
                     </div>
                 </form>
             </div>
@@ -106,10 +136,10 @@
             <div class="container">
                 <table class="table table-sm">
                     <tr>
-                        <th>Fecha Registrada</th>
-                        <th>Fecha de Entrega</th>
-                        <th>Dias</th>
-                        <th>Equipos</th>
+                        <th th:text="#{fecha}">Fecha Registrada</th>
+                        <th th:text="#{fechaEntrega}">Fecha de Entrega</th>
+                        <th th:text="#{dias}">Dias</th>
+                        <th th:text="#{equipo}">Equipos</th>
                     </tr>
                     <th:block th:each="alquiler : ${rentals}">
 
@@ -121,7 +151,7 @@
                                 <dl>
                                     <th:block th:each="equip : ${alquiler.equipRental}">
 
-                                        <dd th:text="${equip.equip.name} + ' - '+${equip.cantidadRentada} +' Unidades'"> </dd>
+                                        <dd th:text="${equip.equip.name} + ' - '+${equip.cantidadRentada} +' Stock'"> </dd>
 
                                     </th:block>
                                 </dl>
@@ -149,30 +179,6 @@
 </div>
 <!-- /#wrapper -->
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Bootstrap core JavaScript-->
 <script th:src="@{vendor/jquery/jquery.min.js}"></script>
 <script th:src="@{js/bootstrap.bundle.min.js}"></script>
@@ -180,6 +186,20 @@
 <!-- Core plugin JavaScript-->
 <script th:src="@{js/jquery.easing.min.js}"></script>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#es").click(function () {
+            var selectedOption = $(this).attr('id');
+            window.location.replace('historial?lang=' + selectedOption);
+
+        });
+        $("#en").click(function () {
+            var selectedOption = $(this).attr('id');
+            window.location.replace('historial?lang=' + selectedOption);
+
+        });
+    });
+</script>
 
 <!-- Custom scripts for all pages-->
 <script th:src="@{js/sb-admin.min.js}"></script>

@@ -35,11 +35,23 @@
 
 <body id="page-top">
 
+
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
     <img th:src="@{uploads/kh.png}" style="width:64px;height:64px;">
-    <a class="navbar-brand mr-1" href="">Kamehaus Rentals </a>
+    <a class="navbar-brand mr-1" href="">Kamehaus Rentals</a>
+    <br>
 
 
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a id="es"> <img th:src="@{uploads/do.png}"></a>
+            </li>
+            <li class="nav-item">
+                <a id="en"><img th:src="@{uploads/us.png}"></a>
+            </li>
+        </ul>
+    </div>
 
     <!-- Navbar -->
 
@@ -54,31 +66,39 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>
+
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/indexUser">
                 <i class="fas fa-fw fa-user"></i>
-                <span>Clientes</span></a>
+                <span th:text="#{cliente}"></span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/indexEquipos">
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>Equipos</span></a>
+                <span th:text="#{equipo}"></span></a>
             <a class="nav-link" href="/indexFamilia">
                 <i class="fas fa-fw fa-plus"></i>
-                <span>Familias</span></a>
+                <span th:text="#{familia}"></span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="/indexAlquiler">
                 <i class="fas fa-fw fa-boxes"></i>
-                <span>Alquiler</span></a>
+                <span th:text="#{alquiler}">Alquiler</span></a>
             <a class="nav-link" href="/indexEntrega">
                 <i class="fas fa-fw fa-receipt"></i>
-                <span>Entregas</span></a>
+                <span th:text="#{entrega}"></span></a>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/historial">
+                <i class="fas fa-fw fa-history"></i>
+                <span th:text="#{historial}"></span></a>
+        </li>
+
     </ul>
 
     <div id="content-wrapper">
@@ -96,9 +116,11 @@
             </ol>
 
             <form action="#" th:action="@{/crearAlquiler}" th:object="${alquiler}" method="POST" class="form-group">
-                <p>Fecha: <input type="text" class="form-control" th:value = "${alquiler.date}"  disabled="disabled" required/></p>
-                <p>Fecha de entrega: <input type="text" class="form-control" th:field="*{deliveryDate}" id="datepicker" required /></p>
-                <label for="selectClient">Cliente:</label>
+                <label th:text="#{fecha}" for=""></label>
+                <input type="text" class="form-control" th:value = "${alquiler.date}"  disabled="disabled" required/>
+                <label th:text="#{fechaEntrega}"></label>
+                <input type="text" class="form-control" th:field="*{deliveryDate}" id="datepicker" required />
+                <label for="selectClient" th:text="#{cli}">Cliente:</label>
                 <select th:field="*{client}" class="form-control" name="selectClient" id="selectClient">
                 <th:block th:each="client : ${clientes}">
                         <option th:value="${client.id}" th:text="${client.name}"  >...</option>
@@ -107,14 +129,14 @@
 
                 <table class="table">
                     <tr>
-                        <th>Elegir</th>
-                        <th>Foto</th>
-                        <th>Familia</th>
-                        <th>Nombre</th>
-                        <th>Sub-Familia</th>
-                        <th>Costo por Dia</th>
-                        <th>Stock Disponible</th>
-                        <th>Stock a Rentar</th>
+                        <th th:text="#{elegir}">Elegir</th>
+                        <th th:text="#{foto}">Foto</th>
+                        <th th:text="#{fam}">Familia</th>
+                        <th th:text="#{nombre}">Nombre</th>
+                        <th th:text="#{subFamilia}">Sub-Familia</th>
+                        <th th:text="#{costoDia}">Costo por Dia</th>
+                        <th th:text="#{stockA}">Stock Disponible</th>
+                        <th th:text="#{stockR}">Stock a Rentar</th>
                     </tr>
 
 
@@ -137,7 +159,7 @@
                 </table>
 
 
-                <p><input type="submit" value="Crear" class="form-control" />
+                <p><input type="submit" th:value="#{crear}" class="form-control" />
             </form>
 
         </div>
@@ -158,29 +180,7 @@
 </div>
 <!-- /#wrapper -->
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="../login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Bootstrap core JavaScript-->
 <script th:src="@{vendor/jquery/jquery.min.js}"></script>
@@ -189,6 +189,23 @@
 <!-- Core plugin JavaScript-->
 <script th:src="@{js/jquery.easing.min.js}"></script>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#es").click(function () {
+            var selectedOption = $(this).attr('id');
+            window.location.replace('crearAlquiler?lang=' + selectedOption);
+
+        });
+        $("#en").click(function () {
+            var selectedOption = $(this).attr('id');
+            window.location.replace('crearAlquiler?lang=' + selectedOption);
+
+        });
+    });
+</script>
 
 <!-- Custom scripts for all pages-->
 <script th:src="@{js/sb-admin.min.js}"></script>
