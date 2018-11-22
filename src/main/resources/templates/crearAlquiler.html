@@ -116,7 +116,7 @@
             </ol>
 
             <form action="#" th:action="@{/crearAlquiler}" th:object="${alquiler}" method="POST" class="form-group">
-                <label th:text="#{fecha}" for=""></label>
+                <label th:text="#{fecha}"></label>
                 <input type="text" class="form-control" th:value = "${alquiler.date}"  disabled="disabled" required/>
                 <label th:text="#{fechaEntrega}"></label>
                 <input type="text" class="form-control" th:field="*{deliveryDate}" id="datepicker" required />
@@ -190,7 +190,6 @@
 <script th:src="@{js/jquery.easing.min.js}"></script>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
