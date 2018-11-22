@@ -105,7 +105,7 @@
             <form action="#" th:action="@{/crearFamilia}" th:object="${familia}" method="POST" enctype=multipart/form-data class="form-group">
                <label th:text="#{famMa}" for="hijo"></label>
                 <select class="form-control" th:field="*{hijo}" >
-                    <option th:value="null">No tiene</option>
+                    <option th:value="null">N/A</option>
                     <th:block th:each="fam : ${familias}" class="form-control">
                         <option th:value="${fam.id}" th:text="${fam.nombre}"></option>
                     </th:block></select>
