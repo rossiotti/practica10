@@ -94,6 +94,7 @@ public class DashboardController {
 
         model.setViewName("historial");
         model.addObject("clientes",cs.listClients());
+        model.addObject("Cliente",cs.findClient(id).getName());
         model.addObject("rentals",rentalList);
         return model;
 

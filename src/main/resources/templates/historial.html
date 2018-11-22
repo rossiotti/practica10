@@ -24,16 +24,6 @@
 
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
     <img th:src="@{uploads/kh.png}" style="width:64px;height:64px;">
-    <a class="navbar-brand mr-1" href="">Kamehaus Rentals </a>
-
-
-
-    <!-- Navbar -->
-
-</nav>
-
-<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-    <img th:src="@{uploads/kh.png}" style="width:64px;height:64px;">
     <a class="navbar-brand mr-1" href="">Kamehaus Rentals</a>
     <br>
 
@@ -111,28 +101,25 @@
             </ol>
 
             <!-- Page Content -->
-            <h1>Historial</h1>
+            <h1 th:text="#{historial}">Historial</h1>
             <hr>
             <div class="container">
                 <h3 th:text="#{cli}">Cliente:</h3>
-                <form class="form-group" th:action="@{/historial}" method="POST">
 
-                    <div>
-                        <div class="input-group">
-                            <select class="form-control" th:name="selectClient">
-                                <option>...</option>
+                <form class="form-inline" th:action="@{/historial}" method="POST">
+
+                            <select class="form-control col-10" th:name="selectClient">
+                                <option th:text="#{cli}">...</option>
                                 <th:block th:each="client : ${clientes}">
                                     <option th:value="${client.id}" th:text="${client.name}"></option>
                                 </th:block>
                             </select>
-                        </div>
-                    </div>
-                    <div class="fa-pull-left">
-                        <input type="submit" th:value="#{buscar}" class="form-control" />
-                    </div>
+                        <input type="submit" th:value="#{buscar}" class="form-control col" />
                 </form>
             </div>
 
+            <h5><strong th:text="${Cliente}"></strong></h5>
+            <h6 th:text="#{alquiler}"></h6>
             <div class="container">
                 <table class="table table-sm">
                     <tr>
@@ -185,6 +172,9 @@
 
 <!-- Core plugin JavaScript-->
 <script th:src="@{js/jquery.easing.min.js}"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 
 <script type="text/javascript">
     $(document).ready(function() {
