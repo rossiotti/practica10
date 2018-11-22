@@ -44,35 +44,35 @@ public class DashboardController {
         int diasTotal = 0 ;
         for (Rental r:rentalList) {
             for (EquipRental e:r.getEquipRental()) {
-                FamDias f = new FamDias();
-                f.setLabel(e.getEquip().getFamily().getNombre());
-                diasTotal+= e.getDias();
-                f.setY(e.getDias());
-                famDias.add(f);
-                FamDias f2 = new FamDias();
-                if(e.getEquip().getSubFamily() != null) {
-                    f2.setY(e.getDias());
-                    f2.setLabel(e.getEquip().getSubFamily().getNombre());
-                    famDias.add(f2);
+                if(e.getReturned()){
+                    FamDias f = new FamDias();
+                    f.setLabel(e.getEquip().getFamily().getNombre());
+                    diasTotal+= e.getDias();
+                    f.setY(e.getDias());
+                    famDias.add(f);
+                    FamDias f2 = new FamDias();
+                    if(e.getEquip().getSubFamily() != null) {
+                        f2.setY(e.getDias());
+                        f2.setLabel("("+f.getLabel()+") "+e.getEquip().getSubFamily().getNombre());
+                        famDias.add(f2);
+                    }
                 }
-
             }
         }
 
         int chk = 0;
         int chk2 = 0;
         for (int i = 0; i < famDias.size() ; i++) {
-            String label = famDias.get(i).getLabel();
-            for (int j = 1; j < famDias.size() ; j++) {
-                if(label.equals(famDias.get(j).getLabel())){
+            for (int j = i+1; j <famDias.size() ; j++) {
+                if(famDias.get(i).getLabel().equals(famDias.get(j).getLabel())){
+                    famDias.get(i).setY(famDias.get(i).getY() + famDias.get(j).getY());
                     famDias.remove(famDias.get(j));
-                    break;
+                   j--;
                 }
-
             }
-
-
         }
+
+
         model.setViewName("admin");
         model.addObject("famDias",famDias);
         model.addObject("diasTotales",diasTotal);

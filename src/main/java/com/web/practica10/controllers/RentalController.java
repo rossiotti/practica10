@@ -95,9 +95,14 @@ public class RentalController {
                 if(e.getId() == i){
                     equipRentService.updateStatus(e,true);
                     total+= e.getCostoRenta();
-                    check++;
+
                 }
             }
+        }
+        for (EquipRental ep:rental.getEquipRental()
+             ) {
+            if(ep.getReturned())
+                check++;
         }
         if(check == rental.getEquipRental().size()){
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

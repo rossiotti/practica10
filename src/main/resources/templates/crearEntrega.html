@@ -120,14 +120,14 @@
                                     </tr>
 
                                         <th:block th:each="equip, iter: ${alquiler.equipRental}">
-                                            <tr>
-                                            <td><input type="checkbox" th:name="chk" class="form-control" th:value="${equip.id}"></td>
-                                            <td th:text="${equip.equip.family.nombre}"></td>
-                                            <td th:text="${equip.equip.name}"></td>
-                                            <td id="rent" th:text="${equip.cantidadRentada}"></td>
-                                            <td id="cost" th:text="${equip.equip.tariff}"></td>
-                                                <td th:text="${equip.dias}"></td>
-                                                <td th:text="${equip.costoRenta}"></td>
+                                            <tr th:if="${equip.returned == false}">
+                                            <td th:if="${equip.returned == false}"><input  type="checkbox" th:name="chk" class="form-control" th:value="${equip.id}"></td>
+                                            <td th:if="${equip.returned == false}" th:text="${equip.equip.family.nombre}"></td>
+                                            <td th:if="${equip.returned == false}" th:text="${equip.equip.name}"></td>
+                                            <td th:if="${equip.returned == false}" id="rent" th:text="${equip.cantidadRentada}"></td>
+                                            <td th:if="${equip.returned == false}" id="cost" th:text="${equip.equip.tariff}"></td>
+                                                <td th:if="${equip.returned == false}" th:text="${equip.dias}"></td>
+                                                <td th:if="${equip.returned == false}" th:text="${equip.costoRenta}"></td>
                                             </tr>
                                         </th:block>
 
