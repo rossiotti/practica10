@@ -57,7 +57,6 @@ public class UserDetailsServiceImp implements UserDetailsService {
             AppUser admin = new AppUser();
             admin.setUsername("admin");
             admin.setPassword("admin");
-            admin.setPassword("admin");
             admin.setEnabled(true);
             admin.setRolSet(new HashSet<>(Arrays.asList(rol)));
 
