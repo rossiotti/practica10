@@ -74,7 +74,7 @@ public class DashboardController {
         model.setViewName("admin");
         model.addObject("famDias",famDias);
         model.addObject("diasTotales",diasTotal);
-        mod.addAttribute("puerto", ""+request.getLocalPort());
+        model.addObject("puerto", ""+request.getLocalPort());
         return model;
         }
     @RequestMapping(value = "/historial", method = RequestMethod.GET)
