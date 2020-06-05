@@ -5,6 +5,7 @@
 # Equipo de Trabajo
 
 **Elias Santiago** - Mat. 2014-0717
+
 **Ronald Mariotti** - Mat. 2014-0698
 
 # Tecnologías requeridas
