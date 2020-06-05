@@ -1,14 +1,14 @@
-## Practica #10 Spring Boot de Web Avanzada
+# Practica #10 Spring Boot de Web Avanzada
 
 ![Alt Text](https://www.ced.org.do/wp-content/uploads/pucmm349x138.png.jpg)
 
-# Equipo de Trabajo
+## Equipo de Trabajo
 
 **Elias Santiago** - Mat. 2014-0717
 
 **Ronald Mariotti** - Mat. 2014-0698
 
-# Tecnologías requeridas
+## Tecnologías requeridas
 
 - HTML5
 - CSS
