@@ -1,6 +1,6 @@
 # Practica #10 Spring Boot de Web Avanzada
 
-![Alt Text](https://www.ced.org.do/wp-content/uploads/pucmm349x138.png.jpg)
+![LOGO](https://www.deafworlds.org/wp-content/uploads/2019/08/pucmm349x138.png.jpg)
 
 ### Spring Boot Web Store Demo Video:
 https://www.youtube.com/watch?v=QC9x2fMSWBQ
